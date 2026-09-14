@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LOUIE — 루이의 기록</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Gowun+Batang:wght@400;700&display=swap');
+
+:root{
+  --cream:#f6f1e8;
+  --paper:#fffdf8;
+  --brown:#5d5146;
+  --dark:#302b27;
+  --muted:#9c9287;
+  --line:#e9e1d6;
+  --sage:#9baa91;
+  --sage-dark:#73826a;
+  --peach:#e8b59f;
+  --shadow:0 20px 60px rgba(77,63,47,.10);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  background:
+    radial-gradient(circle at 5% 0%,rgba(232,181,159,.20),transparent 28%),
+    radial-gradient(circle at 100% 20%,rgba(155,170,145,.20),transparent 25%),
+    var(--cream);
+  color:var(--dark);
+  font-family:"DM Sans","Noto Sans KR",sans-serif;
+}
+
+button,input,textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+  border:0;
+}
+
+.app{
+  width:min(1420px,calc(100% - 40px));
+  margin:auto;
+  padding:34px 0 70px;
+}
+
+/* ---------------- HEADER ---------------- */
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:34px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.brand-icon{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:#7d8e73;
+  color:white;
+  display:grid;
+  place-items:center;
+  font-size:23px;
+  box-shadow:0 10px 25px rgba(115,130,106,.25);
+}
+
+.brand-title{
+  font-family:"Gowun Batang",serif;
+  font-size:29px;
+  letter-spacing:-1px;
+}
+
+.brand-sub{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:2px;
+  letter-spacing:.5px;
+}
+
+.header-actions{
+  display:flex;
+  gap:8px;
+}
+
+.header-btn{
+  width:43px;
+  height:43px;
+  border-radius:50%;
+  background:rgba(255,255,255,.6);
+  border:1px solid var(--line);
+  color:var(--brown);
+  transition:.2s;
+}
+
+.header-btn:hover{
+  transform:translateY(-2px);
+  background:white;
+}
+
+/* ---------------- HERO ---------------- */
+
+.hero{
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:22px;
+  margin-bottom:24px;
+}
+
+.hero-card{
+  min-height:220px;
+  border-radius:30px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:var(--shadow);
+}
+
+.hero-photo{
+  background:
+    linear-gradient(90deg,rgba(39,32,27,.65),transparent),
+    url("https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1400&q=85")
+    center/cover;
+}
+
+.hero-content{
+  position:absolute;
+  left:34px;
+  bottom:30px;
+  color:white;
+}
+
+.hero-content small{
+  opacity:.75;
+  font-size:11px;
+  letter-spacing:2px;
+}
+
+.hero-content h2{
+  font-family:"Gowun Batang",serif;
+  font-size:42px;
+  font-weight:400;
+  margin:4px 0;
+}
+
+.hero-content p{
+  font-size:13px;
+  opacity:.9;
+}
+
+.stats-card{
+  background:rgba(255,253,248,.78);
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:30px;
+  padding:28px;
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.stats-card h3{
+  font-family:"Gowun Batang",serif;
+  font-size:22px;
+  font-weight:400;
+  margin-bottom:17px;
+}
+
+.stats{
+  display:flex;
+  gap:35px;
+}
+
+.stat strong{
+  display:block;
+  font-size:27px;
+  font-weight:600;
+}
+
+.stat span{
+  color:var(--muted);
+  font-size:11px;
+}
+
+/* ---------------- CALENDAR ---------------- */
+
+.calendar-card{
+  background:rgba(255,253,248,.82);
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:30px;
+  padding:28px;
+  box-shadow:var(--shadow);
+}
+
+.calendar-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:25px;
+}
+
+.month{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.month h2{
+  font-family:"Gowun Batang",serif;
+  font-size:30px;
+  font-weight:400;
+}
+
+.today{
+  padding:7px 11px;
+  background:#edf0e8;
+  color:var(--sage-dark);
+  border-radius:20px;
+  font-size:10px;
+}
+
+.nav{
+  display:flex;
+  gap:7px;
+}
+
+.nav button{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  background:#f1ece4;
+  color:var(--brown);
+}
+
+.weekdays,
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+}
+
+.weekday{
+  text-align:center;
+  color:#a69c91;
+  font-size:10px;
+  padding-bottom:12px;
+  letter-spacing:1px;
+}
+
+.day{
+  min-height:135px;
+  border:1px solid var(--line);
+  margin:-1px 0 0 -1px;
+  padding:10px;
+  background:rgba(255,255,255,.25);
+  cursor:pointer;
+  transition:.2s;
+  position:relative;
+  overflow:hidden;
+}
+
+.day:hover{
+  background:#fffaf2;
+  z-index:2;
+}
+
+.day.empty{
+  background:rgba(245,239,230,.35);
+  cursor:default;
+}
+
+.day.selected{
+  background:#f0f2ec;
+  box-shadow:inset 0 0 0 2px #b6c1ac;
+}
+
+.day-number{
+  width:27px;
+  height:27px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  font-size:11px;
+  color:#756a5f;
+  margin-bottom:5px;
+}
+
+.day.today .day-number{
+  background:var(--brown);
+  color:white;
+}
+
+.media-thumb{
+  width:100%;
+  height:73px;
+  object-fit:cover;
+  border-radius:9px;
+  display:block;
+  margin-top:5px;
+}
+
+.video-thumb{
+  position:relative;
+}
+
+.video-thumb::after{
+  content:"▶";
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:27px;
+  height:27px;
+  border-radius:50%;
+  background:rgba(255,255,255,.9);
+  color:var(--brown);
+  font-size:9px;
+  display:grid;
+  place-items:center;
+}
+
+.media-label{
+  position:absolute;
+  bottom:7px;
+  left:7px;
+  background:rgba(40,35,30,.55);
+  color:white;
+  padding:3px 6px;
+  border-radius:6px;
+  font-size:8px;
+}
+
+/* ---------------- MEMORY ---------------- */
+
+.memory{
+  margin-top:24px;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:22px;
+}
+
+.memory-card{
+  background:rgba(255,253,248,.88);
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:30px;
+  padding:25px;
+  box-shadow:var(--shadow);
+}
+
+.memory-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:18px;
+}
+
+.memory-date{
+  color:var(--sage-dark);
+  font-size:11px;
+  letter-spacing:.5px;
+}
+
+.memory-head h3{
+  font-family:"Gowun Batang",serif;
+  font-size:25px;
+  font-weight:400;
+  margin-top:3px;
+}
+
+.memory-media{
+  width:100%;
+  height:350px;
+  border-radius:18px;
+  object-fit:cover;
+  background:#eee8df;
+}
+
+.memory-caption{
+  margin-top:17px;
+  padding:0 4px;
+}
+
+.memory-caption p{
+  font-family:"Gowun Batang",serif;
+  font-size:17px;
+  line-height:1.8;
+  color:#62584e;
+}
+
+.caption-meta{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.empty-memory{
+  height:350px;
+  border-radius:18px;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      #f2ece3,
+      #f2ece3 10px,
+      #eee7dd 10px,
+      #eee7dd 20px
+    );
+  display:grid;
+  place-items:center;
+  color:#9c9184;
+  text-align:center;
+}
+
+.empty-memory strong{
+  display:block;
+  font-family:"Gowun Batang",serif;
+  font-size:22px;
+  font-weight:400;
+  margin-bottom:5px;
+}
+
+.side-info{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.quote-card{
+  background:#7d8e73;
+  color:white;
+  border-radius:30px;
+  padding:28px;
+  min-height:160px;
+}
+
+.quote-card span{
+  opacity:.65;
+  font-size:10px;
+  letter-spacing:2px;
+}
+
+.quote-card p{
+  font-family:"Gowun Batang",serif;
+  font-size:21px;
+  line-height:1.7;
+  margin-top:13px;
+}
+
+.add-card{
+  background:#fffaf2;
+  border:1px dashed #d9cdbd;
+  border-radius:30px;
+  padding:28px;
+  flex:1;
+}
+
+.add-card h3{
+  font-family:"Gowun Batang",serif;
+  font-size:22px;
+  font-weight:400;
+  margin-bottom:15px;
+}
+
+.add-btn{
+  width:100%;
+  padding:13px;
+  border-radius:14px;
+  background:var(--brown);
+  color:white;
+  font-size:12px;
+}
+
+/* ---------------- MODAL ---------------- */
+
+.modal-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(42,35,29,.42);
+  backdrop-filter:blur(8px);
+  z-index:100;
+  display:none;
+  place-items:center;
+  padding:20px;
+}
+
+.modal-bg.show{
+  display:grid;
+}
+
+.modal{
+  width:min(510px,100%);
+  background:#fffdf8;
+  border-radius:28px;
+  padding:27px;
+  box-shadow:0 30px 100px rgba(30,25,20,.25);
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.modal-head h3{
+  font-family:"Gowun Batang",serif;
+  font-size:24px;
+  font-weight:400;
+}
+
+.close{
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  background:#f0ebe3;
+  color:var(--brown);
+}
+
+.form-group{
+  margin-bottom:15px;
+}
+
+label{
+  display:block;
+  color:#887d71;
+  font-size:10px;
+  font-weight:600;
+  margin-bottom:7px;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  border:1px solid #e7ded3;
+  border-radius:12px;
+  padding:11px 12px;
+  outline:none;
+  background:#fbf8f2;
+  color:var(--dark);
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+.type-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.type-btn{
+  padding:11px;
+  border-radius:11px;
+  background:#f0ebe3;
+  color:#81766b;
+  font-size:11px;
+}
+
+.type-btn.active{
+  background:#dfe6d9;
+  color:#5f7056;
+}
+
+.save-btn{
+  width:100%;
+  padding:13px;
+  background:var(--brown);
+  color:white;
+  border-radius:13px;
+  margin-top:5px;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media(max-width:950px){
+  .hero,
+  .memory{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:650px){
+
+  .app{
+    width:calc(100% - 18px);
+    padding-top:18px;
+  }
+
+  header{
+    margin-bottom:20px;
+  }
+
+  .brand-title{
+    font-size:24px;
+  }
+
+  .hero-content h2{
+    font-size:33px;
+  }
+
+  .calendar-card{
+    padding:15px;
+  }
+
+  .day{
+    min-height:82px;
+    padding:5px;
+  }
+
+  .media-thumb{
+    height:43px;
+  }
+
+  .calendar-head{
+    margin-bottom:18px;
+  }
+
+  .month h2{
+    font-size:24px;
+  }
+
+  .memory-card{
+    padding:17px;
+  }
+
+  .memory-media{
+    height:300px;
+  }
+
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+<header>
+
+  <div class="brand">
+
+    <div class="brand-icon">
+      ♡
+    </div>
+
+    <div>
+      <div class="brand-title">louie</div>
+      <div class="brand-sub">
+        LITTLE MEMORIES OF MY BEST FRIEND
+      </div>
+    </div>
+
+  </div>
+
+  <div class="header-actions">
+
+    <button class="header-btn" id="todayBtn">
+      ○
+    </button>
+
+    <button class="header-btn" id="addBtn">
+      ＋
+    </button>
+
+  </div>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-card hero-photo">
+
+    <div class="hero-content">
+
+      <small>MY LITTLE ARCHIVE</small>
+
+      <h2>루이와 보낸<br>소중한 순간들</h2>
+
+      <p>
+        Every ordinary day became a memory.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="stats-card">
+
+    <h3>루이의 작은 기록장</h3>
+
+    <div class="stats">
+
+      <div class="stat">
+        <strong id="photoCount">0</strong>
+        <span>PHOTO</span>
+      </div>
+
+      <div class="stat">
+        <strong id="videoCount">0</strong>
+        <span>VIDEO</span>
+      </div>
+
+      <div class="stat">
+        <strong id="memoryCount">0</strong>
+        <span>MEMORIES</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CALENDAR -->
+
+<section class="calendar-card">
+
+  <div class="calendar-head">
+
+    <div class="month">
+
+      <h2 id="monthTitle"></h2>
+
+      <button class="today" id="jumpToday">
+        TODAY
+      </button>
+
+    </div>
+
+    <div class="nav">
+
+      <button id="prev">‹</button>
+      <button id="next">›</button>
+
+    </div>
+
+  </div>
+
+
+  <div class="weekdays">
+
+    <div class="weekday">SUN</div>
+    <div class="weekday">MON</div>
+    <div class="weekday">TUE</div>
+    <div class="weekday">WED</div>
+    <div class="weekday">THU</div>
+    <div class="weekday">FRI</div>
+    <div class="weekday">SAT</div>
+
+  </div>
+
+
+  <div class="calendar-grid" id="calendar"></div>
+
+</section>
+
+
+<!-- MEMORY -->
+
+<section class="memory">
+
+  <div class="memory-card">
+
+    <div class="memory-head">
+
+      <div>
+
+        <div class="memory-date" id="memoryDate">
+          SELECT A DATE
+        </div>
+
+        <h3 id="memoryTitle">
+          루이의 하루
+        </h3>
+
+      </div>
+
+    </div>
+
+
+    <div id="memoryContent">
+
+      <div class="empty-memory">
+
+        <div>
+
+          <strong>오늘의 루이를 기록해보세요</strong>
+
+          사진이나 영상을 추가하면<br>
+          이곳에 소중한 기억이 남아요.
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="side-info">
+
+    <div class="quote-card">
+
+      <span>LOUIE'S NOTE</span>
+
+      <p>
+        "평범했던 하루가<br>
+        나중에는 가장 그리운 하루가 되니까."
+      </p>
+
+    </div>
+
+
+    <div class="add-card">
+
+      <h3>
+        오늘의 순간을 남겨볼까요?
+      </h3>
+
+      <button class="add-btn" id="addMemory">
+        + 사진 / 영상 추가하기
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div class="modal-bg" id="modal">
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <h3>루이의 순간 기록하기</h3>
+
+      <button class="close" id="close">
+        ×
+      </button>
+
+    </div>
+
+
+    <form id="form">
+
+      <div class="form-group">
+
+        <label>DATE</label>
+
+        <input
+          id="date"
+          type="date"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>TYPE</label>
+
+        <div class="type-row">
+
+          <button
+            type="button"
+            class="type-btn active"
+            data-type="photo"
+          >
+            📷 PHOTO
+          </button>
+
+          <button
+            type="button"
+            class="type-btn"
+            data-type="video"
+          >
+            ▶ VIDEO
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>PHOTO / VIDEO URL</label>
+
+        <input
+          id="mediaUrl"
+          placeholder="이미지 주소 또는 영상 주소"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>CAPTION</label>
+
+        <textarea
+          id="caption"
+          placeholder="그날의 루이를 기억할 수 있는 말을 남겨주세요."
+        ></textarea>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>MEMORY TITLE</label>
+
+        <input
+          id="title"
+          placeholder="예: 처음 바다를 본 날"
+        >
+
+      </div>
+
+
+      <button class="save-btn">
+        이 순간을 기록하기
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* -----------------------------
+   DATA
+----------------------------- */
+
+let memories =
+JSON.parse(
+  localStorage.getItem("louie-memories") || "{}"
+);
+
+let currentDate = new Date();
+
+let selectedDate = new Date();
+
+let selectedType = "photo";
+
+
+/* -----------------------------
+   HELPERS
+----------------------------- */
+
+function key(date){
+
+  return `${date.getFullYear()}-${
+    String(date.getMonth()+1).padStart(2,"0")
+  }-${
+    String(date.getDate()).padStart(2,"0")
+  }`;
+
+}
+
+
+function formatDate(date){
+
+  const days=[
+    "일요일",
+    "월요일",
+    "화요일",
+    "수요일",
+    "목요일",
+    "금요일",
+    "토요일"
+  ];
+
+  return `${
+    date.getFullYear()
+  }. ${
+    String(date.getMonth()+1).padStart(2,"0")
+  }. ${
+    String(date.getDate()).padStart(2,"0")
+  } · ${days[date.getDay()]}`;
+
+}
+
+
+function save(){
+
+  localStorage.setItem(
+    "louie-memories",
+    JSON.stringify(memories)
+  );
+
+}
+
+
+/* -----------------------------
+   CALENDAR
+----------------------------- */
+
+function renderCalendar(){
+
+  const calendar =
+    document.getElementById("calendar");
+
+  calendar.innerHTML="";
+
+  const year =
+    currentDate.getFullYear();
+
+  const month =
+    currentDate.getMonth();
+
+  document.getElementById("monthTitle")
+    .textContent =
+    `${year}년 ${month+1}월`;
+
+
+  const first =
+    new Date(year,month,1).getDay();
+
+  const total =
+    new Date(year,month+1,0).getDate();
+
+
+  for(let i=0;i<first;i++){
+
+    const empty =
+      document.createElement("div");
+
+    empty.className="day empty";
+
+    calendar.appendChild(empty);
+
+  }
+
+
+  for(let d=1;d<=total;d++){
+
+    const date =
+      new Date(year,month,d);
+
+    const k=key(date);
+
+    const cell =
+      document.createElement("div");
+
+    cell.className="day";
+
+
+    if(
+      date.toDateString() ===
+      new Date().toDateString()
+    ){
+
+      cell.classList.add("today");
+
+    }
+
+
+    if(k === key(selectedDate)){
+
+      cell.classList.add("selected");
+
+    }
+
+
+    const num =
+      document.createElement("div");
+
+    num.className="day-number";
+
+    num.textContent=d;
+
+    cell.appendChild(num);
+
+
+    const item=memories[k];
+
+
+    if(item){
+
+      if(item.type==="photo"){
+
+        const img =
+          document.createElement("img");
+
+        img.className="media-thumb";
+
+        img.src=item.url;
+
+        img.alt="루이의 사진";
+
+        cell.appendChild(img);
+
+      }
+      else{
+
+        const wrap =
+          document.createElement("div");
+
+        wrap.className="video-thumb";
+
+        const img =
+          document.createElement("img");
+
+        img.className="media-thumb";
+
+        img.src =
+          item.thumbnail ||
+          "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=500&q=80";
+
+        wrap.appendChild(img);
+
+        const label =
+          document.createElement("div");
+
+        label.className="media-label";
+
+        label.textContent="VIDEO";
+
+        wrap.appendChild(label);
+
+        cell.appendChild(wrap);
+
+      }
+
+    }
+
+
+    cell.addEventListener("click",()=>{
+
+      selectedDate=date;
+
+      renderCalendar();
+
+      renderMemory();
+
+    });
+
+
+    calendar.appendChild(cell);
+
+  }
+
+}
+
+
+/* -----------------------------
+   MEMORY
+----------------------------- */
+
+function renderMemory(){
+
+  const k=key(selectedDate);
+
+  const item=memories[k];
+
+  document.getElementById("memoryDate")
+    .textContent=formatDate(selectedDate);
+
+
+  if(!item){
+
+    document.getElementById("memoryTitle")
+      .textContent="루이의 하루";
+
+    document.getElementById("memoryContent")
+      .innerHTML=`
+
+      <div class="empty-memory">
+
+        <div>
+
+          <strong>아직 기록이 없어요</strong>
+
+          사진이나 영상을 추가해서<br>
+          오늘의 루이를 기록해보세요.
+
+        </div>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  document.getElementById("memoryTitle")
+    .textContent=
+    item.title || "루이의 하루";
+
+
+  let mediaHTML="";
+
+
+  if(item.type==="photo"){
+
+    mediaHTML=`
+
+      <img
+        class="memory-media"
+        src="${item.url}"
+        alt="루이의 추억"
+      >
+
+    `;
+
+  }else{
+
+    mediaHTML=`
+
+      <video
+        class="memory-media"
+        src="${item.url}"
+        controls
+        playsinline
+      ></video>
+
+    `;
+
+  }
+
+
+  document.getElementById("memoryContent")
+    .innerHTML=`
+
+      ${mediaHTML}
+
+      <div class="memory-caption">
+
+        <p>
+          ${escapeHTML(
+            item.caption ||
+            "오늘도 루이와 함께한 소중한 하루."
+          )}
+        </p>
+
+        <div class="caption-meta">
+          ${item.type==="photo" ? "📷 PHOTO" : "▶ VIDEO"}
+          · ${formatDate(selectedDate)}
+        </div>
+
+      </div>
+
+    `;
+
+}
+
+
+/* -----------------------------
+   MODAL
+----------------------------- */
+
+function openModal(){
+
+  document.getElementById("modal")
+    .classList.add("show");
+
+  document.getElementById("date").value=
+    key(selectedDate);
+
+}
+
+
+function closeModal(){
+
+  document.getElementById("modal")
+    .classList.remove("show");
+
+  document.getElementById("form").reset();
+
+  selectedType="photo";
+
+  document.querySelectorAll(".type-btn")
+    .forEach(btn=>btn.classList.remove("active"));
+
+  document
+    .querySelector('[data-type="photo"]')
+    .classList.add("active");
+
+}
+
+
+document.getElementById("addBtn")
+  .addEventListener("click",openModal);
+
+document.getElementById("addMemory")
+  .addEventListener("click",openModal);
+
+document.getElementById("close")
+  .addEventListener("click",closeModal);
+
+
+document.getElementById("modal")
+  .addEventListener("click",e=>{
+
+    if(e.target.id==="modal"){
+      closeModal();
+    }
+
+  });
+
+
+document.querySelectorAll(".type-btn")
+  .forEach(btn=>{
+
+    btn.addEventListener("click",()=>{
+
+      document.querySelectorAll(".type-btn")
+        .forEach(b=>b.classList.remove("active"));
+
+      btn.classList.add("active");
+
+      selectedType=
+        btn.dataset.type;
+
+    });
+
+  });
+
+
+document.getElementById("form")
+  .addEventListener("submit",e=>{
+
+    e.preventDefault();
+
+    const date =
+      document.getElementById("date").value;
+
+    const url =
+      document.getElementById("mediaUrl").value.trim();
+
+    const caption =
+      document.getElementById("caption").value.trim();
+
+    const title =
+      document.getElementById("title").value.trim();
+
+
+    memories[date]={
+
+      type:selectedType,
+
+      url,
+
+      caption,
+
+      title
+
+    };
+
+
+    save();
+
+    selectedDate =
+      new Date(date+"T12:00:00");
+
+    currentDate =
+      new Date(selectedDate);
+
+
+    closeModal();
+
+    renderCalendar();
+
+    renderMemory();
+
+    renderStats();
+
+  });
+
+
+/* -----------------------------
+   STATS
+----------------------------- */
+
+function renderStats(){
+
+  const items=
+    Object.values(memories);
+
+  const photos=
+    items.filter(x=>x.type==="photo").length;
+
+  const videos=
+    items.filter(x=>x.type==="video").length;
+
+
+  document.getElementById("photoCount")
+    .textContent=photos;
+
+  document.getElementById("videoCount")
+    .textContent=videos;
+
+  document.getElementById("memoryCount")
+    .textContent=items.length;
+
+}
+
+
+/* -----------------------------
+   NAV
+----------------------------- */
+
+document.getElementById("prev")
+  .addEventListener("click",()=>{
+
+    currentDate.setMonth(
+      currentDate.getMonth()-1
+    );
+
+    renderCalendar();
+
+  });
+
+
+document.getElementById("next")
+  .addEventListener("click",()=>{
+
+    currentDate.setMonth(
+      currentDate.getMonth()+1
+    );
+
+    renderCalendar();
+
+  });
+
+
+function goToday(){
+
+  currentDate=new Date();
+
+  selectedDate=new Date();
+
+  renderCalendar();
+
+  renderMemory();
+
+}
+
+
+document.getElementById("todayBtn")
+  .addEventListener("click",goToday);
+
+document.getElementById("jumpToday")
+  .addEventListener("click",goToday);
+
+
+/* -----------------------------
+   SECURITY
+----------------------------- */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* -----------------------------
+   INIT
+----------------------------- */
+
+renderCalendar();
+
+renderMemory();
+
+renderStats();
+
+</script>
+
+</body>
+</html>
